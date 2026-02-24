@@ -1,6 +1,6 @@
 {
   "name": "readme-author",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zero-config CLI tool to auto-generate README.md from your project",
   "main": "dist/cli.js",
   "type": "commonjs",
@@ -14,9 +14,9 @@
     "build": "tsc"
   },
   "repository": {
-  "type": "git",
-  "url": "https://github.com/tallman1O/readme-author.git"
-},
+    "type": "git",
+    "url": "https://github.com/tallman1O/readme-author.git"
+  },
   "keywords": [
     "cli",
     "readme",
