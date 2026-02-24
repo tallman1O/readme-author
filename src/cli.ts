@@ -48,63 +48,83 @@ function askOverwrite(filePath: string): Promise<boolean> {
   });
 }
 
-program.action(async () => {
-  const projectPath = process.cwd();
+program
+  .argument("[projectPath]", "Path to project directory", ".")
+  .action(async (projectPathArg: string) => {
+    const projectPath = path.resolve(process.cwd(), projectPathArg);
 
-  let spinner: Ora | null = null;
+    let spinner: Ora | null = null;
 
-  try {
-    spinner = ora(chalk.cyan("Analyzing project...")).start();
-    await sleep(2000);
-    if (!detectNodeProject(projectPath)) {
-      spinner.fail(chalk.yellow("No supported project detected in this directory."));
-      return;
-    }
-    spinner.succeed(chalk.green("Project detected."));
+    try {
+      spinner = ora(chalk.cyan("Analyzing project...")).start();
+      await sleep(500);
 
-    spinner = ora(chalk.cyan("Reading package.json...")).start();
-    await sleep(2000);
-    const pkg = parsePackageJson(projectPath);
-    spinner.succeed(chalk.green("package.json read successfully."));
-
-    spinner = ora(chalk.cyan("Generating README content...")).start();
-    await sleep(2000);
-    const markdown = generateReadmeMarkdown(pkg);
-    spinner.succeed(chalk.green("README content generated."));
-
-    const readmePath = path.join(projectPath, "README.md");
-    const creatingNew = !fs.existsSync(readmePath);
-
-    if (!creatingNew) {
-      if (spinner) {
-        spinner.stop();
-      }
-      const shouldOverwrite = await askOverwrite(readmePath);
-      if (!shouldOverwrite) {
-        console.log(chalk.yellow("Aborted. Existing README.md was not overwritten."));
+      if (!detectNodeProject(projectPath)) {
+        spinner.fail(
+          chalk.yellow("No supported project detected in the provided directory.")
+        );
         return;
       }
-      spinner = ora(chalk.cyan("Updating existing README.md...")).start();
-    } else {
-      spinner = ora(chalk.cyan("Creating README.md...")).start();
-    }
 
-    await sleep(2000);
-    fs.writeFileSync(readmePath, markdown, "utf8");
-    spinner.succeed(
-      chalk.green(creatingNew ? "README.md created successfully!" : "README.md updated successfully!")
-    );
-  } catch (error) {
-    if (spinner) {
-      spinner.fail(chalk.red("Failed to generate README.md."));
-    } else {
-      console.error(chalk.red("Failed to generate README.md."));
+      spinner.succeed(chalk.green("Project detected."));
+
+      spinner = ora(chalk.cyan("Reading package.json...")).start();
+      await sleep(500);
+
+      const pkg = parsePackageJson(projectPath);
+
+      spinner.succeed(chalk.green("package.json read successfully."));
+
+      spinner = ora(chalk.cyan("Generating README content...")).start();
+      await sleep(500);
+
+      const markdown = generateReadmeMarkdown(pkg);
+
+      spinner.succeed(chalk.green("README content generated."));
+
+      const readmePath = path.join(projectPath, "README.md");
+      const creatingNew = !fs.existsSync(readmePath);
+
+      if (!creatingNew) {
+        if (spinner) spinner.stop();
+
+        const shouldOverwrite = await askOverwrite(readmePath);
+
+        if (!shouldOverwrite) {
+          console.log(
+            chalk.yellow("Aborted. Existing README.md was not overwritten.")
+          );
+          return;
+        }
+
+        spinner = ora(chalk.cyan("Updating existing README.md...")).start();
+      } else {
+        spinner = ora(chalk.cyan("Creating README.md...")).start();
+      }
+
+      await sleep(500);
+      fs.writeFileSync(readmePath, markdown, "utf8");
+
+      spinner.succeed(
+        chalk.green(
+          creatingNew
+            ? "README.md created successfully!"
+            : "README.md updated successfully!"
+        )
+      );
+    } catch (error) {
+      if (spinner) {
+        spinner.fail(chalk.red("Failed to generate README.md."));
+      } else {
+        console.error(chalk.red("Failed to generate README.md."));
+      }
+
+      if (error instanceof Error) {
+        console.error(chalk.red(error.message));
+      }
+
+      process.exitCode = 1;
     }
-    if (error instanceof Error) {
-      console.error(chalk.red(error.message));
-    }
-    process.exitCode = 1;
-  }
-});
+  });
 
 program.parse(process.argv);

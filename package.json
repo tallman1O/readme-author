@@ -1,19 +1,34 @@
 {
   "name": "readme-author",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
-  },
+  "version": "0.1.0",
+  "description": "Zero-config CLI tool to auto-generate README.md from your project",
+  "main": "dist/cli.js",
+  "type": "commonjs",
   "bin": {
     "readme-author": "./dist/cli.js"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/tallman1O/readme-author.git"
+},
+  "keywords": [
+    "cli",
+    "readme",
+    "documentation",
+    "nodejs",
+    "developer-tools"
+  ],
+  "author": "Mehul Uttam",
   "license": "ISC",
-  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
