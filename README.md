@@ -8,6 +8,14 @@ Run a single command inside your project folder and get a clean, formatted READM
 
 ---
 
+## Installation & Usage
+
+No global install required.
+
+```bash
+npx -y readme-author@latest .
+```
+
 ## Why?
 
 Most developers either:
@@ -34,10 +42,3 @@ Most developers either:
 No setup. No configuration. No manual input.
 
 ---
-
-## Installation & Usage
-
-No global install required.
-
-```bash
-npx -y readme-author@latest .
