@@ -9,6 +9,8 @@ import { Command } from "commander";
 import { detectNodeProject } from "./core/stack-detector";
 import { parsePackageJson } from "./core/package-parser";
 import { generateReadmeMarkdown } from "./generator/markdown-generator";
+import nodeFiglet = require("figlet");
+import gradient from "gradient-string";
 
 const program = new Command();
 
@@ -21,6 +23,13 @@ program
   .description("Auto generate README.md from project")
   .version("1.0.0");
 
+console.log(
+    gradient.rainbow(nodeFiglet.textSync("README AUTHOR", {
+        horizontalLayout: "default",
+      })
+    ))
+
+    
 function askOverwrite(filePath: string): Promise<boolean> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
