@@ -1,10 +1,9 @@
 {
   "name": "readme-author",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Zero-config CLI tool to auto-generate README.md from your project",
   "main": "dist/cli.js",
   "type": "commonjs",
-
   "bin": {
     "readme-author": "dist/cli.js"
   },
