@@ -1,44 +1,94 @@
 # readme-author
 
-![readme-author banner](https://raw.githubusercontent.com/tallman1O/readme-author/main/public/images/mvp.png)
+![Version](https://img.shields.io/badge/version-0.1.4-blue) ![License](https://img.shields.io/badge/license-ISC-green)
 
-A zero-config CLI tool that analyzes your Node.js project and automatically generates a structured `README.md`.
+Zero-config CLI tool to auto-generate README.md from your project
 
-Run a single command inside your project folder and get a clean, formatted README in seconds.
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Dependencies](#dependencies)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
----
+## Overview
+Zero-config CLI tool to auto-generate README.md from your project
 
-## Installation & Usage
+## Features
+- Quick setup and installation.
+- Script-driven development workflow.
+- Auto-generated documentation baseline.
 
-No global install required.
+## Getting Started
+### Prerequisites
+- Node.js 18+
+- npm
 
+### Installation
+npm install
+
+### Run
 ```bash
-npx -y readme-author@latest .
+npm run build
 ```
 
-## Why?
+## Available Scripts
+| Script | Command |
+| --- | --- |
+| `build` | `npm run build` |
 
-Most developers either:
+## Project Structure
+```text
+.
+├── public/
+│   └── images/
+│       └── mvp.png
+├── scripts/
+├── src/
+│   ├── core/
+│   │   ├── package-parser.ts
+│   │   └── stack-detector.ts
+│   ├── generator/
+│   │   └── markdown-generator.ts
+│   └── cli.ts
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── tsconfig.json
+```
 
-- Skip writing READMEs  
-- Write incomplete documentation  
-- Forget installation and execution steps  
-- Keep outdated instructions  
+## Dependencies
+- Runtime dependencies: 6
+- Development dependencies: 5
 
-`readme-author` removes that friction by generating a consistent, structured README directly from your project configuration.
+### Runtime
+- `chalk`
+- `commander`
+- `figlet`
+- `fs-extra`
+- `gradient-string`
+- `ora`
 
----
+### Development
+- `@types/figlet`
+- `@types/gradient-string`
+- `@types/node`
+- `ts-node`
+- `typescript`
 
-## Features (v0.1.x – MVP)
+## Configuration
+- Keywords: `cli`, `readme`, `documentation`, `nodejs`, `developer-tools`
+- Repository: https://github.com/tallman1O/readme-author.git
+- Author: Mehul Uttam
+- Version: 0.1.4
 
-- Detects Node.js projects  
-- Reads `package.json`  
-- Extracts project name and description  
-- Lists important npm scripts  
-- Generates installation instructions  
-- Creates or updates `README.md`  
-- Prompts before overwriting existing README files  
+## Contributing
+Contributions are welcome. Please open an issue first to discuss any major change.
 
-No setup. No configuration. No manual input.
-
----
+## License
+Licensed under the ISC license.

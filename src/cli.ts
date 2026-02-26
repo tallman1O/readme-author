@@ -10,7 +10,7 @@ import { detectNodeProject } from "./core/stack-detector";
 import { parsePackageJson } from "./core/package-parser";
 import { generateReadmeMarkdown } from "./generator/markdown-generator";
 import nodeFiglet = require("figlet");
-import gradient from "gradient-string";
+import { rainbow } from "gradient-string";
 
 const program = new Command();
 
@@ -24,12 +24,13 @@ program
   .version("1.0.0");
 
 console.log(
-    gradient.rainbow(nodeFiglet.textSync("README AUTHOR", {
-        horizontalLayout: "default",
-      })
-    ))
+  rainbow(
+    nodeFiglet.textSync("README AUTHOR", {
+      horizontalLayout: "default",
+    }),
+  ),
+);
 
-    
 function askOverwrite(filePath: string): Promise<boolean> {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
@@ -43,7 +44,7 @@ function askOverwrite(filePath: string): Promise<boolean> {
         rl.close();
         const normalized = answer.trim().toLowerCase();
         resolve(normalized === "y" || normalized === "yes");
-      }
+      },
     );
   });
 }
@@ -61,7 +62,9 @@ program
 
       if (!detectNodeProject(projectPath)) {
         spinner.fail(
-          chalk.yellow("No supported project detected in the provided directory.")
+          chalk.yellow(
+            "No supported project detected in the provided directory.",
+          ),
         );
         return;
       }
@@ -78,7 +81,7 @@ program
       spinner = ora(chalk.cyan("Generating README content...")).start();
       await sleep(500);
 
-      const markdown = generateReadmeMarkdown(pkg);
+      const markdown = generateReadmeMarkdown(pkg, projectPath);
 
       spinner.succeed(chalk.green("README content generated."));
 
@@ -92,7 +95,7 @@ program
 
         if (!shouldOverwrite) {
           console.log(
-            chalk.yellow("Aborted. Existing README.md was not overwritten.")
+            chalk.yellow("Aborted. Existing README.md was not overwritten."),
           );
           return;
         }
@@ -109,8 +112,8 @@ program
         chalk.green(
           creatingNew
             ? "README.md created successfully!"
-            : "README.md updated successfully!"
-        )
+            : "README.md updated successfully!",
+        ),
       );
     } catch (error) {
       if (spinner) {
