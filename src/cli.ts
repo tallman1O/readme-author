@@ -49,10 +49,21 @@ function askOverwrite(filePath: string): Promise<boolean> {
   });
 }
 
+function isNpmYesEnabled(): boolean {
+  const value = process.env.npm_config_yes;
+  return value === "true" || value === "1";
+}
+
 program
   .argument("[projectPath]", "Path to project directory", ".")
-  .action(async (projectPathArg: string) => {
+  .option(
+    "-y, --yes",
+    "Skip overwrite confirmation and overwrite existing README.md",
+    false,
+  )
+  .action(async (projectPathArg: string, options: { yes?: boolean }) => {
     const projectPath = path.resolve(process.cwd(), projectPathArg);
+    const skipOverwritePrompt = Boolean(options.yes) || isNpmYesEnabled();
 
     let spinner: Ora | null = null;
 
@@ -90,8 +101,9 @@ program
 
       if (!creatingNew) {
         if (spinner) spinner.stop();
-
-        const shouldOverwrite = await askOverwrite(readmePath);
+        const shouldOverwrite = skipOverwritePrompt
+          ? true
+          : await askOverwrite(readmePath);
 
         if (!shouldOverwrite) {
           console.log(
