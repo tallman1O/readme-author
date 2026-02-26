@@ -1,6 +1,6 @@
 # readme-author
 
-![Version](https://img.shields.io/badge/version-0.1.5-blue) ![License](https://img.shields.io/badge/license-ISC-green)
+![Version](https://img.shields.io/badge/version-0.1.6-blue) ![License](https://img.shields.io/badge/license-ISC-green)
 
 Zero-config CLI tool to auto-generate README.md from your project
 
@@ -34,6 +34,7 @@ npm run build
 | Script | Command |
 | --- | --- |
 | `build` | `npm run build` |
+| `start` | `npm run start` |
 
 ## Project Structure
 ```text
@@ -79,7 +80,7 @@ npm run build
 - Keywords: `cli`, `readme`, `documentation`, `nodejs`, `developer-tools`
 - Repository: https://github.com/tallman1O/readme-author.git
 - Author: Mehul Uttam
-- Version: 0.1.5
+- Version: 0.1.6
 
 ## Contributing
 Contributions are welcome. Please open an issue first to discuss any major change.
