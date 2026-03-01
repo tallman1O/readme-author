@@ -25,7 +25,7 @@ Zero-config CLI tool to auto-generate README.md from your project
 
 | Tech | Description |
 |------|-------------|
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) | Typed JavaScript |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) | TypeScript |
 
 ---
 
@@ -64,6 +64,8 @@ npm run start
 │   ├── core/
 │   │   ├── package-parser.ts
 │   │   └── stack-detector.ts
+│   ├── data/
+│   │   └── tech-badge.ts
 │   ├── generator/
 │   │   └── markdown-generator.ts
 │   └── cli.ts
