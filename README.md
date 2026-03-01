@@ -16,7 +16,7 @@ Zero-config CLI tool to auto-generate README.md from your project
 
 ## 🚀 Available Scripts
 
-✅ `npm run build`
+✅ `npm run build`  
 ✅ `npm run start`
 
 ---

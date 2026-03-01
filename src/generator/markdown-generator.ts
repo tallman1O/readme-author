@@ -86,7 +86,7 @@ export function generateReadmeMarkdown(pkg: PackageJson, projectPath: string): s
     : "_No recognizable tech stack dependencies detected._";
 
   const scriptList = scripts.length
-    ? scripts.map((s) => `✅ \`npm run ${s}\``).join("\n")
+    ? scripts.map((s) => `✅ \`npm run ${s}\``).join("  \n")
     : "_No npm scripts defined._";
 
   const devCommand = scripts.includes("dev")
